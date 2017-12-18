@@ -15,7 +15,7 @@ Looking for a simple, responsive, theme for your Jekyll powered blog? Well look 
 
 ![screenshot of So Simple Theme](http://mmistakes.github.io/so-simple-theme/images/so-simple-theme-preview.jpg)
 
-See a [live version of So Simple](http://mmistakes.github.io/so-simple-theme/) hosted on GitHub.
+See a [live version of So Simple](http://steven-shoff.github.io) hosted on GitHub.
 
 ---
 
