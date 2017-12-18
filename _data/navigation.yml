@@ -1,0 +1,16 @@
+# Site navigation links
+
+- title: About
+  url: /about/
+
+- title: ML articles
+  url: /articles/
+
+- title: ML models
+  url: /blog/
+
+#- title: Theme Setup
+#  url: /theme-setup/
+
+- title: Search
+  url: /search/

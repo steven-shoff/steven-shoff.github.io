@@ -1,0 +1,383 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>LDA Classifier &#8211; Shoff's Machine Learning World</title>
+<meta name="description" content="Method:       Linear Discriminant Analysis
+
+">
+<meta name="keywords" content="">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="LDA Classifier">
+<meta name="twitter:description" content="Method:       Linear Discriminant Analysis
+
+">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/sitelogo2.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LDA Classifier">
+<meta property="og:description" content="Method:       Linear Discriminant Analysis
+
+">
+<meta property="og:url" content="http://localhost:4000/blog/classifier_lda/">
+<meta property="og:site_name" content="Shoff's Machine Learning World">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/blog/classifier_lda/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Shoff's Machine Learning World Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/articles/" >ML articles</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/blog/" >ML models</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="Shoff's Machine Learning World"><img src="http://localhost:4000/images/sitelogo2.png" width="200" height="200" alt="Shoff's Machine Learning World logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">Shoff's Machine Learning World</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">This website is designed for absolute begninner in Machine Learning. It guides you to learn various models in Machine Learning step-by-step. In here, you will definitely find the beauty of data and get crazy about various state-of-art method! Have fun!</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          
+        </ul>
+        
+          <h1 class="entry-title">LDA Classifier</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://localhost:4000/images/sitelogo2.png" class="bio-photo" alt="Chit Long Tang bio photo"/>
+        
+        <span class="author vcard">By <span class="fn">Chit Long Tang</span></span>
+        <span class="entry-date date published"><time datetime="2017-12-01T20:39:55+01:00"><i class="fa fa-calendar-o"></i> December 01, 2017</time></span>
+        <span class="entry-date date modified"><time datetime="2017-12-02 19:19:19 +0100"><i class="fa fa-pencil"></i> December 02, 2017</time></span>
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <h2 id="method-------linear-discriminant-analysis">Method:       Linear Discriminant Analysis</h2>
+
+<p>Types:        Supervised Learning - Classifier</p>
+
+<p>Requirement:  Training Instances with labels</p>
+
+<p>LDA is a classifier with linear decision surface. It performed supervised learning by projecting input data into a linear subspace with direction which maximize distances between classes.</p>
+
+<p>In this example, we will use ‘digit’ dataset in sklearn as training and test data. For giving simple tutorials to beginners in ML, we will pick digit ‘1’ and ‘7’ only.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="kn">as</span> <span class="nn">pat</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span>
+
+<span class="c"># 1. Data Preparation</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>                          <span class="c"># Load digit dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[</span><span class="s">'data'</span><span class="p">]</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[</span><span class="s">"images"</span><span class="p">]</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">digits</span><span class="p">[</span><span class="s">"target"</span><span class="p">]</span>
+
+<span class="n">num1</span><span class="p">,</span> <span class="n">num2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">7</span>                              <span class="c"># Data filtering</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">target</span> <span class="o">==</span> <span class="n">num1</span><span class="p">,</span> <span class="n">target</span> <span class="o">==</span> <span class="n">num2</span><span class="p">)</span>
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">filtered_target</span> <span class="o">=</span> <span class="n">target</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="n">filtered_target</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="n">num1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c"># Relabel targets</span>
+<span class="n">filtered_target</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="n">num2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="k">print</span> <span class="s">"Filtered dataset has {} instances."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered_target</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p>In this example, we try to distinguish ‘1’ and ‘7’ from the dataset:
+<img src="/images/Classifier/digit1.png" alt="digit1" />
+<img src="/images/Classifier/digit7.png" alt="digit7" /></p>
+
+<p>To perform dimension reduction, we start with hand-crafted method first. Advanced dimension reduction techniques (Linear Regression, Ridge Regression with Regularization…etc will be shown in other chapters.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># 2. Dimension Reduction</span>
+
+<span class="k">def</span> <span class="nf">reduce_dim</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">instance_num</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">reduced_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">instance_num</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s">"float64"</span><span class="p">)</span>
+    
+    <span class="n">imgn1</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">imgn2</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">imgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">imgn1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">imgn2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">imgn2</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">img_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">imgn1</span> <span class="o">-</span> <span class="n">imgn2</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    
+    <span class="c"># If you want to visualize the result, uncomment the following lines:</span>
+    <span class="c"># plt.figure()</span>
+    <span class="c"># plt.imshow(img_diff, interpolation = "nearest")   </span>
+    <span class="c"># plt.figure()</span>
+    <span class="c"># plt.imshow(images[num1]-images[num2], interpolation = "nearest")    </span>
+    <span class="c"># plt.show()</span>
+    
+    <span class="n">feature_1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">12</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">19</span><span class="p">]</span> <span class="o">+</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">44</span><span class="p">]</span><span class="o">+</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">52</span><span class="p">]</span><span class="o">+</span><span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">60</span><span class="p">]</span>
+    <span class="n">feature_2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">14</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">50</span><span class="p">]</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">58</span><span class="p">]</span>
+    
+    <span class="n">reduced_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">feature_1</span><span class="p">,</span> <span class="n">feature_2</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">reduced_x</span>
+    
+<span class="n">reduced_data</span> <span class="o">=</span> <span class="n">reduce_dim</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">)</span>    
+<span class="k">print</span> <span class="s">'The shape of x before reduction = {}.</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">'The shape of x after reduction = {}.</span><span class="se">\n</span><span class="s">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">))</span>
+</code></pre>
+</div>
+<p>Digit data after dimension reduction:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="c"># 3. Data Visualization</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">reduced_n1</span> <span class="o">=</span> <span class="n">reduced_data</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">reduced_n2</span> <span class="o">=</span> <span class="n">reduced_data</span><span class="p">[</span><span class="n">filtered_target</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">reduced_n1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">reduced_n1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">'x'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">reduced_n2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">reduced_n2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'green'</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s">'.'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p><img src="/images/Classifier/classifier_data.png" alt="data_dim" /></p>
+
+<p>Then we start training the classifier with training instances and labels</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># 4. Filtered dataset spliting</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">cross_validation</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">filtered_target</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c"># print np.shape(X_train), np.shape(X_test), np.shape(y_train), np.shape(y_test)</span>
+
+<span class="c"># 5. LDA Training and Testing Function:</span>
+
+<span class="k">def</span> <span class="nf">fit_lda</span><span class="p">(</span><span class="n">training_features</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">):</span>
+    
+    <span class="n">fea0</span> <span class="o">=</span> <span class="n">training_features</span><span class="p">[</span><span class="n">train_labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">fea1</span> <span class="o">=</span> <span class="n">training_features</span><span class="p">[</span><span class="n">train_labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">mu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fea0</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">mu1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fea1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mu0</span><span class="p">,</span> <span class="n">mu1</span><span class="p">])</span>
+    
+    <span class="n">covmat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">training_features</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    
+    <span class="n">p1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">-</span><span class="n">p1</span><span class="p">,</span> <span class="n">p1</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">mu</span><span class="p">,</span> <span class="n">covmat</span><span class="p">,</span> <span class="n">p</span>
+
+<span class="k">def</span> <span class="nf">predict_lda</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">covmat</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">test_features</span><span class="p">):</span>
+    
+    <span class="n">predicted_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_features</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">test_features</span><span class="p">)):</span>
+        
+        <span class="n">qd_result</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">mu</span><span class="p">)):</span>
+            <span class="n">fun_val</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">covmat</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">test_features</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">covmat</span><span class="p">)),(</span><span class="n">test_features</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">qd_result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fun_val</span><span class="p">)</span>
+        
+        <span class="n">predicted_labels</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qd_result</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>     
+    <span class="k">return</span> <span class="n">predicted_labels</span>
+
+<span class="c"># 6. LDA Implementation</span>
+
+<span class="c"># 6a. Training part:</span>
+<span class="n">mu_lda</span><span class="p">,</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="n">p_lda</span> <span class="o">=</span> <span class="n">fit_lda</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>  
+<span class="n">training_estimate_lda</span> <span class="o">=</span> <span class="n">predict_lda</span><span class="p">(</span><span class="n">mu_lda</span><span class="p">,</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="n">p_lda</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+
+<span class="c"># 6b. Testing part</span>
+<span class="n">test_estimate_lda</span> <span class="o">=</span> <span class="n">predict_lda</span><span class="p">(</span><span class="n">mu_lda</span><span class="p">,</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="n">p_lda</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+</code></pre>
+</div>
+<p>To evaluate the accuracy/performance of the clssifier, we simply calculate the error rate of training set and test set</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c"># 7. Error Evaluation:</span>
+<span class="n">LDA_trainerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">training_estimate_lda</span> <span class="o">-</span> <span class="n">y_train</span><span class="p">))</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span> <span class="s">"Error rate of  LDA Classifer with training data = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">LDA_trainerr</span><span class="p">)</span>
+
+<span class="n">LDA_testerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="nb">abs</span><span class="p">(</span><span class="n">test_estimate_lda</span> <span class="o">-</span> <span class="n">y_test</span><span class="p">))</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span> <span class="s">"Error rate of  LDA Classifer with test data = {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">LDA_testerr</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>If you are interested in visualizing the decision region, you can also implement the following code:</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="c"># Decision Region Visualization</span>
+
+<span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'lightcoral'</span><span class="p">,</span> <span class="s">'lightblue'</span><span class="p">])</span>
+<span class="n">cmap_bold</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s">'coral'</span><span class="p">,</span> <span class="s">'darkcyan'</span><span class="p">])</span>
+
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">min</span><span class="p">()</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">10</span>
+
+<span class="c">#Create 426x252 pixels image</span>
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+                         <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="n">predict_lda</span><span class="p">(</span><span class="n">mu_lda</span><span class="p">,</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="n">p_lda</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">splot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s">'equal'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span><span class="n">X_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> 
+            <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_bold</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s">'k'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">],</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s">'k'</span><span class="p">)</span>
+<span class="n">plot_ellipse</span><span class="p">(</span><span class="n">splot</span><span class="p">,</span> <span class="n">mu_lda</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">plot_ellipse</span><span class="p">(</span><span class="n">splot</span><span class="p">,</span> <span class="n">mu_lda</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">covmat_lda</span><span class="p">,</span> <span class="s">'royalblue'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">xx</span><span class="o">.</span><span class="nb">max</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">yy</span><span class="o">.</span><span class="nb">min</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="nb">max</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Visualization"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre>
+</div>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/articles/author-override/" class="btn" title="Article Testing">Previous</a>
+      
+      
+        <a href="http://localhost:4000/blog/classifier_qda/" class="btn" title="QDA Classifier">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2017 Chit Long Tang. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/https://github.com/steven-shoff" title="Chit Long Tang on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

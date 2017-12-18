@@ -1,0 +1,69 @@
+[
+
+  
+    {
+      "title"			: "QDA Classifier",
+      "link"			: "http://localhost:4000/blog/classifier_qda/",
+      "excerpt"		: "Method:       Quadratic Discriminant Analysis"
+    }
+  
+
+  
+    ,{
+      "title"			: "LDA Classifier",
+      "link"			: "http://localhost:4000/blog/classifier_lda/",
+      "excerpt"		: "Method:       Linear Discriminant Analysis"
+    }
+  
+
+  
+    ,{
+      "title"			: "Article Testing",
+      "link"			: "http://localhost:4000/articles/author-override/",
+      "excerpt"		: "An article to test overriding the default site author."
+    }
+  
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    ,{
+      "title"			: "About the Author",
+      "link"			: "http://localhost:4000/about/",
+      "excerpt"		: "The beauty of data is yet to be discovered"
+    }
+  
+
+  
+    ,{
+      "title"			: "Theme Setup",
+      "link"			: "http://localhost:4000/theme-setup/",
+      "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
+    }
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+]
