@@ -2,7 +2,7 @@
 layout: post
 title: "Introduction to Brownian Motion"
 modified:
-categories: articles
+categories: simu
 excerpt:
 tags: [Brownian Motion, Simulation]
 images:

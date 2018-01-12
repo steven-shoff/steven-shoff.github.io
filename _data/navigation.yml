@@ -3,14 +3,14 @@
 - title: About
   url: /about/
 
-- title: ML articles
-  url: /articles/
+- title: Simulation
+  url: /simu/
 
 - title: ML models
-  url: /blog/
+  url: /ml/
 
-#- title: Theme Setup
-#  url: /theme-setup/
+- title: HTML for you
+  url: /learn_html/
 
 - title: Search
   url: /search/

@@ -1,0 +1,283 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Introduction to Brownian Motion &#8211; Shoff's Machine Learning World</title>
+<meta name="description" content="Method: Brownain Motion
+
+">
+<meta name="keywords" content="Brownian Motion, Simulation">
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Introduction to Brownian Motion">
+<meta name="twitter:description" content="Method: Brownain Motion
+
+">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/sitelogo2.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Brownian Motion">
+<meta property="og:description" content="Method: Brownain Motion
+
+">
+<meta property="og:url" content="http://localhost:4000/simu/brownian_motion/">
+<meta property="og:site_name" content="Shoff's Machine Learning World">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/simu/brownian_motion/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Shoff's Machine Learning World Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://localhost:4000/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://localhost:4000/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://localhost:4000/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/simu/" >Simulation</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/ml/" >ML models</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/learn_html/" >HTML for you</a></li>
+		  
+		    
+		    <li><a href="http://localhost:4000/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://localhost:4000/" class="site-logo" rel="home" title="Shoff's Machine Learning World"><img src="http://localhost:4000/images/sitelogo2.png" width="200" height="200" alt="Shoff's Machine Learning World logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://localhost:4000/">Shoff's Machine Learning World</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">This website is designed for absolute begninner in Machine Learning. It guides you to learn various models in Machine Learning step-by-step. In here, you will definitely find the beauty of data and get crazy about various state-of-art method! Have fun!</h2>
+	</div>
+</header><!-- /.masthead -->
+
+<div class="js-menu-screen menu-screen"></div>
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <ul class="entry-tags">
+          <li><a href="http://localhost:4000/tags/#Brownian Motion" title="Pages tagged Brownian Motion">Brownian Motion</a></li><li><a href="http://localhost:4000/tags/#Simulation" title="Pages tagged Simulation">Simulation</a></li>
+        </ul>
+        
+          <h1 class="entry-title">Introduction to Brownian Motion</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://localhost:4000/images/sitelogo2.png" class="bio-photo" alt="Chit Long Tang bio photo"/>
+        
+        <span class="author vcard">By <span class="fn">Chit Long Tang</span></span>
+        <span class="entry-date date published"><time datetime="2018-01-01T20:39:55+01:00"><i class="fa fa-calendar-o"></i> January 01, 2018</time></span>
+        <span class="entry-date date modified"><time datetime="2018-01-01 23:19:19 +0100"><i class="fa fa-pencil"></i> January 01, 2018</time></span>
+        
+        
+        
+      </footer>
+      <div class="entry-content">
+        <h2 id="method-brownain-motion">Method: Brownain Motion</h2>
+
+<p>Brownian Motion (or Wiener Process) is a basic ingredient of a model in describing stochastic evolution. This article shows how to simulate the motion of a varible (or particle) in 1-dimension using python. You will discover some useful ways to visualize the analyze the difference between different Brownian Motion model. Once you understand the simulations, you can tweak the code to simulate the actual experimental conditions in your study.</p>
+
+<p>Packages used in the simulation:</p>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>     <span class="c"># For generating random numbers</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>  <span class="c"># For ploting purpose</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</code></pre>
+</div>
+
+<p>Model: Simple Brownian Motion</p>
+
+<p>The code below shows how to stimulate the motion of a single particle in one-dimension. The motion is composed of a squence of normally distributed random displacement.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">BrownianMotion</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="c"># Step 0: Initial Condition</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">W_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">W</span><span class="p">]</span>
+    
+    <span class="c"># Step 1: Draw random numbers Z from Gaussian distibution</span>
+    <span class="c"># Step 2: W &lt;- W + sqrt(dt)*Z</span>
+    <span class="c"># Step 3: Repeat until i &lt; N</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">W_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">W_all</span>
+</code></pre>
+</div>
+
+<p>To calculate the deviation of motions in each timestep, we run the model for 100 times to acquire the following result:</p>
+
+<p><img src="/images/Simulation/bm1d1.png" alt="bm1d1" /></p>
+
+<p>Model: Geometric Brownian Motion</p>
+
+<p>For particles which only have non-negative moment (only move forward), Simple Brownian Motion is not approriate for modeling stock prices. Instead, a non-negative variation , named Geometric Brownian motion,  takes care of the non-negativity feature.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">geoBrownianMotion</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="c"># Step 0: Initial Condition</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">S_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="p">]</span>
+    
+    <span class="c"># Step 1-4:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">S</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">r</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="n">sigma</span><span class="o">*</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+        <span class="n">S_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S_all</span>
+</code></pre>
+</div>
+<p>Same as the above, we run the model for 100 times to acquire follwing results:
+<img src="/images/Simulation/bm1d2.png" alt="bm1d2" /></p>
+
+<p>Model: Brownian Bridge</p>
+
+<p>Brownian Bridge is a special model extend from Brownian Motion. The model allows controlling the position at specific time.</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">BrownianBridge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="c"># Step 0: Initial Condition</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">W_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">W</span><span class="p">]</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c"># Step 1-4:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">))</span>
+        <span class="n">W_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">W</span><span class="p">)</span>
+    <span class="n">S_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>
+        <span class="n">S_all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">W_all</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> \
+                     <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">t</span><span class="o">-</span> <span class="n">t0</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">T</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span><span class="o">*</span> <span class="p">(</span><span class="n">W_all</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">y</span><span class="o">+</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">S_all</span>
+</code></pre>
+</div>
+<p>The result of Brownian Bridge has significant different features from the previous models:
+<img src="/images/Simulation/bm1d3.png" alt="bm1d3" /></p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://localhost:4000/ml/classifier_qda/" class="btn" title="QDA Classifier">Previous</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
+    
+
+<span>&copy; 2018 Chit Long Tang. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="https://mademistakes.com/work/so-simple-jekyll-theme/" rel="nofollow">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	
+	
+	
+	
+	
+	
+	<a href="https://github.com/https://github.com/steven-shoff" title="Chit Long Tang on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://localhost:4000/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script type="text/javascript">
+  var BASE_URL = 'http://localhost:4000';
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+
+
+
+</body>
+</html>

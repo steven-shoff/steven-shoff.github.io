@@ -1,22 +1,22 @@
 ---
 layout: post
-title: "QDA Classifier"
+title: "LDA Classifier"
 modified:
-categories: blog
+categories: ml
 excerpt:
 tags: []
 images:
-date: 2017-12-02T15:39:55-04:00
-modified: 2017-12-03T14:19:19-04:00
+date: 2017-12-01T15:39:55-04:00
+modified: 2017-12-02T14:19:19-04:00
 ---
 
-## Method:       Quadratic Discriminant Analysis
+## Method:       Linear Discriminant Analysis
 
 Types:        Supervised Learning - Classifier
 
 Requirement:  Training Instances with labels
 
-QDA is a classifier with quadratic decision surface. It performed supervised learning by projecting input data into a quadratic subspace with direction which maximize distances between classes
+LDA is a classifier with linear decision surface. It performed supervised learning by projecting input data into a linear subspace with direction which maximize distances between classes.
 
 In this example, we will use 'digit' dataset in sklearn as training and test data. For giving simple tutorials to beginners in ML, we will pick digit '1' and '7' only.
 
@@ -108,58 +108,58 @@ Then we start training the classifier with training instances and labels
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(reduced_data, filtered_target, test_size = 0.4, random_state = 0)
 # print np.shape(X_train), np.shape(X_test), np.shape(y_train), np.shape(y_test)
 
-# 5. QDA Training and Testing Function:
+# 5. LDA Training and Testing Function:
 
-def fit_qda(tr_features, tr_labels):
+def fit_lda(training_features, train_labels):
     
-    fea_0 = tr_features[tr_labels == 0, :]
-    fea_1 = tr_features[tr_labels == 1, :]
-    mu_0 = np.mean(fea_0, axis = 0)
-    mu_1 = np.mean(fea_1, axis = 0)
-    mu_fit = np.array([mu_0, mu_1])
-    covmat_0 = np.cov(fea_0.T)
-    covmat_1 = np.cov(fea_1.T)
-    covmat_fit = np.array([covmat_0, covmat_1])
-    p1 = float(np.count_nonzero(tr_labels)) / len(tr_labels)
-    p_fit = np.array([1 - p1, p1])
-    
-    return mu_fit, covmat_fit, p_fit
+    fea0 = training_features[train_labels == 0, :]
+    fea1 = training_features[train_labels == 1, :]
 
-def predict_qda(mu_pre, covmat_pre, p_pre, test_feat):
-    labels_pre = np.zeros(len(test_feat))
+    mu0 = np.mean(fea0, axis = 0)
+    mu1 = np.mean(fea1, axis = 0)
+
+    mu = np.array([mu0, mu1])
     
-    for i in range(len(labels_pre)):
+    covmat = np.cov(training_features.T)
+    
+    p1 = float(np.count_nonzero(train_labels))/len(train_labels)
+    p = np.array([1-p1, p1])
+    
+    return mu, covmat, p
+
+def predict_lda(mu, covmat, p, test_features):
+    
+    predicted_labels = np.zeros(len(test_features))
+    
+    for j in range(0,len(test_features)):
+        
         qd_result = []
-        for j in range(len(mu_pre)):
-            val1 = -0.5 * np.log(np.linalg.det(covmat_pre[j, :, :]))
-            val2 = -0.5 * np.dot(np.subtract(test_feat[i], mu_pre[j]), 
-                                 np.dot(np.linalg.inv(covmat_pre[j, :, :]), 
-                                 np.subtract(test_feat[i], mu_pre[j]).T))
-            val3 = np.log(p_pre[j])
-            val = val1 + val2 + val3
-            qd_result.append(val)
-        labels_pre[i] = np.argmax(np.array(qd_result), axis = 0)
-    
-    return labels_pre
+        
+        for i in range(0,len(mu)):
+            fun_val = (-1/2)*np.log(np.linalg.det(covmat)) + (-1/2)*np.dot(np.dot((test_features[j] - mu[i]),np.linalg.inv(covmat)),(test_features[j] - mu[i]).T) + np.log(p[i])
+            qd_result.append(fun_val)
+        
+        predicted_labels[j] = np.argmax(np.array(qd_result), axis = 0)     
+    return predicted_labels
 
-# 6. QDA Implementation
+# 6. LDA Implementation
 
 # 6a. Training part:
-mu_qda, covmat_qda, p_qda = fit_qda(X_train, y_train)  
-training_estimate_qda = predict_qda(mu_qda, covmat_qda, p_qda, X_train)
+mu_lda, covmat_lda, p_lda = fit_lda(X_train, y_train)  
+training_estimate_lda = predict_lda(mu_lda, covmat_lda, p_lda, X_train)
 
 # 6b. Testing part
-test_estimate_qda = predict_qda(mu_lda, covmat_qda, p_qda, X_test)
+test_estimate_lda = predict_lda(mu_lda, covmat_lda, p_lda, X_test)
 ```
 To evaluate the accuracy/performance of the clssifier, we simply calculate the error rate of training set and test set
 
 ```python
 # 7. Error Evaluation:
-QDA_trainerr = np.sum(np.abs(training_estimate_qda - y_train)) / float(y_train.shape[0])
-print "Error rate of  QDA Classifer with training data = {}".format(QDA_trainerr)
+LDA_trainerr = np.sum(np.abs(training_estimate_lda - y_train)) / float(y_train.shape[0])
+print "Error rate of  LDA Classifer with training data = {}".format(LDA_trainerr)
 
-QDA_testerr = np.sum(np.abs(test_estimate_qda - y_test)) / float(y_test.shape[0])
-print "Error rate of  QDA Classifer with test data = {}".format(QDA_testerr)
+LDA_testerr = np.sum(np.abs(test_estimate_lda - y_test)) / float(y_test.shape[0])
+print "Error rate of  LDA Classifer with test data = {}".format(LDA_testerr)
 ```
 
 If you are interested in visualizing the decision region, you can also implement the following code:
@@ -178,7 +178,7 @@ y_min, y_max = X_train[:, 1].min() - 10, X_train[:, 1].max() + 10
 xx, yy = np.meshgrid(np.arange(x_min, x_max, 0.5),
                          np.arange(y_min, y_max, 1))
 
-Z = predict_lda(mu_lda, covmat_lda, p_qda, np.c_[xx.ravel(), yy.ravel()])
+Z = predict_lda(mu_lda, covmat_lda, p_lda, np.c_[xx.ravel(), yy.ravel()])
 Z = np.asarray(Z).reshape(xx.shape)
 
 plt.figure()
@@ -188,8 +188,8 @@ plt.contourf(xx, yy, Z > 0.5, alpha=0.5)
 plt.scatter(X_train[:,0] ,X_train[:,1], c=y_train, 
             cmap=cmap_bold, edgecolor='k', s=20)
 plt.contour(xx, yy, Z, [0.5], linewidths=2., colors='k')
-plot_ellipse(splot, mu_qda[0], covmat_qda, 'r')
-plot_ellipse(splot, mu_qda[1], covmat_qda, 'royalblue')
+plot_ellipse(splot, mu_lda[0], covmat_lda, 'r')
+plot_ellipse(splot, mu_lda[1], covmat_lda, 'royalblue')
 plt.xlim(xx.min(), xx.max())
 plt.ylim(yy.min(), yy.max())
 plt.title("Visualization")
