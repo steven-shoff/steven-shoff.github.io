@@ -2,9 +2,9 @@
 
   
     {
-      "title"			: "Introduction to Brownian Motion",
-      "link"			: "http://localhost:4000/simu/brownian_motion/",
-      "excerpt"		: "Method: Brownain Motion"
+      "title"			: "New_learner",
+      "link"			: "http://localhost:4000/new_learner/",
+      "excerpt"		: "layout: posttitle: “The starting guide of HTML5”modified:categories: learn_htmlexcerpt:tags: [Brownian Motion, Simulation]images:date: 2018-01-12T15:39:55-04:00modified: 2018-01-13T18:19:19-04:00—"
     }
   
 
@@ -21,6 +21,14 @@
       "title"			: "LDA Classifier",
       "link"			: "http://localhost:4000/ml/classifier_lda/",
       "excerpt"		: "Method:       Linear Discriminant Analysis"
+    }
+  
+
+  
+    ,{
+      "title"			: "Brownian_motion",
+      "link"			: "http://localhost:4000/brownian_motion/",
+      "excerpt"		: "layout: posttitle: “Introduction to Brownian Motion”modified:categories: simuexcerpt:tags: [Brownian Motion, Simulation]images:date: 2018-01-01T15:39:55-04:00modified: 2018-01-01T18:19:19-04:00—"
     }
   
 
