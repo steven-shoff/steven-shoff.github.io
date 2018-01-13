@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Simulation
+title: Numerical Analysis
 excerpt: "An archive of articles sorted by date."
 search_omit: true
 ---

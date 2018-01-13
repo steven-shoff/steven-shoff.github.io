@@ -5,16 +5,16 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>The starting guide of HTML5 &#8211; Shoff's Machine Learning World</title>
-<meta name="description" content="This post is specially designed for my sweetheart:)
+<title>Condition Number &#8211; Shoff's Machine Learning World</title>
+<meta name="description" content="Method: Condition Number in Numerical Analysis
 
 ">
-<meta name="keywords" content="HTML5">
+<meta name="keywords" content="Conditional Number, Numerical Analysis, Stability">
 
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="The starting guide of HTML5">
-<meta name="twitter:description" content="This post is specially designed for my sweetheart:)
+<meta name="twitter:title" content="Condition Number">
+<meta name="twitter:description" content="Method: Condition Number in Numerical Analysis
 
 ">
 
@@ -26,18 +26,18 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The starting guide of HTML5">
-<meta property="og:description" content="This post is specially designed for my sweetheart:)
+<meta property="og:title" content="Condition Number">
+<meta property="og:description" content="Method: Condition Number in Numerical Analysis
 
 ">
-<meta property="og:url" content="http://localhost:4000/learnhtml/new_learner/">
+<meta property="og:url" content="http://localhost:4000/simu/intro_cond_num/">
 <meta property="og:site_name" content="Shoff's Machine Learning World">
 
 
 
 
 
-<link rel="canonical" href="http://localhost:4000/learnhtml/new_learner/">
+<link rel="canonical" href="http://localhost:4000/simu/intro_cond_num/">
 <link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Shoff's Machine Learning World Feed">
 
 <!-- https://t.co/dKP3o1e -->
@@ -128,10 +128,10 @@
     <div class="entry-wrapper">
       <header class="entry-header">
         <ul class="entry-tags">
-          <li><a href="http://localhost:4000/tags/#HTML5" title="Pages tagged HTML5">HTML5</a></li>
+          <li><a href="http://localhost:4000/tags/#Conditional Number" title="Pages tagged Conditional Number">Conditional Number</a></li><li><a href="http://localhost:4000/tags/#Numerical Analysis" title="Pages tagged Numerical Analysis">Numerical Analysis</a></li><li><a href="http://localhost:4000/tags/#Stability" title="Pages tagged Stability">Stability</a></li>
         </ul>
         
-          <h1 class="entry-title">The starting guide of HTML5</h1>
+          <h1 class="entry-title">Condition Number</h1>
         
       </header>
       <footer class="entry-meta">
@@ -140,46 +140,86 @@
           <img src="http://localhost:4000/images/sitelogo2.png" class="bio-photo" alt="Chit Long Tang bio photo"/>
         
         <span class="author vcard">By <span class="fn">Chit Long Tang</span></span>
-        <span class="entry-date date published"><time datetime="2018-01-12T20:39:55+01:00"><i class="fa fa-calendar-o"></i> January 12, 2018</time></span>
-        <span class="entry-date date modified"><time datetime="2018-01-12 23:19:19 +0100"><i class="fa fa-pencil"></i> January 12, 2018</time></span>
+        <span class="entry-date date published"><time datetime="2017-10-24T21:39:55+02:00"><i class="fa fa-calendar-o"></i> October 24, 2017</time></span>
+        <span class="entry-date date modified"><time datetime="2017-10-25 00:19:19 +0200"><i class="fa fa-pencil"></i> October 25, 2017</time></span>
         
         
         
       </footer>
       <div class="entry-content">
-        <h2 id="this-post-is-specially-designed-for-my-sweetheart">This post is specially designed for my sweetheart:)</h2>
+        <h2 id="method-condition-number-in-numerical-analysis">Method: Condition Number in Numerical Analysis</h2>
 
-<p>I will try to explain it as easy as possible:)</p>
+<p>Condition number of a function measures how much the outputof the function (ie. <script type="math/tex">y</script>) can change for a small change in the input (i.e. <script type="math/tex">x</script>). The number evaluate the sensitivity of the function when error or change encounted in input. <br /></p>
 
-<p>For every html page, you can treat it as a kind of documents. Hence, we have to start every page with &lt;!DOCTYPE html&gt; to define the type of document.</p>
+<script type="math/tex; mode=display">\begin{align*}
+		\Delta x \rightarrow \Delta y ?
+	\end{align*}</script>
 
-<p>In HTML5 coding, the commands always start with <something> and end with &lt;\something&gt;.</something></p>
+<p>Function with a low condition number is said to be <b> well-conditioned </b> or <b> ill-conditioned </b> when condition number is high.<br /></p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>                                 <span class="c">&lt;!-- For a basic html page, it contains a head and a body --&gt;</span>
+<h5 id="consider-the-following-set-up">Consider the following set-up:</h5>
 
-	<span class="nt">&lt;head&gt;</span>
-		<span class="nt">&lt;title&gt;</span>Page Title<span class="nt">&lt;/title&gt;</span>      <span class="c">&lt;!-- This is where you define the title and other features in the page --&gt;</span>
-	<span class="nt">&lt;/head&gt;</span>
+<p><script type="math/tex">x = (x_1, \dots, x_m)^T \in R^m, y = (y_1, \dots, y_n)^T \in R^n</script> <br /> 
+and <script type="math/tex">y_i = f_i(x_1, \dots, x_m)</script>\  where <script type="math/tex">f_i: R^m \rightarrow R \hspace{20pt} i \in [1, n]</script> <br /></p>
 
-	<span class="nt">&lt;body&gt;</span>
+<h5 id="question-what-is-the-impact-of-perturbation-delta-x-of-x_i-with-respect-to-y_i">Question: What is the impact of perturbation <script type="math/tex">\Delta x</script> of <script type="math/tex">x_i</script>, with respect to <script type="math/tex">y_i</script>?<br /></h5>
 
-		<span class="nt">&lt;h1&gt;</span>This is a Heading<span class="nt">&lt;/h1&gt;</span>     <span class="c">&lt;!-- &lt;h&gt; is a command to define the header of a paragraph --&gt;</span>
-		<span class="nt">&lt;p&gt;</span>This is a paragraph.<span class="nt">&lt;/p&gt;</span>    <span class="c">&lt;!-- &lt;p&gt; is a command to define the content of a paragraph --&gt;</span>
+<script type="math/tex; mode=display">\begin{align*}
+		y_i + \Delta y = f_i (x_1 + \Delta x_1, \dots, x_m + \Delta x_m) \hspace{3pt} \text{for} \hspace{3pt} i = 1, \dots, m
+	\end{align*}</script>
 
-	<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre>
-</div>
+<p><u>Example </u>: We are interested in solving the problem <br /></p>
 
+<p><script type="math/tex">Ay = b</script>, <script type="math/tex">y \in R^n</script>, <script type="math/tex">A \in R^{n \times n}</script>, <script type="math/tex">b \in R^n</script> <br /></p>
+
+<p>Assuming <script type="math/tex">A</script> to be regular , we obtain <script type="math/tex">y = A^{-1} b</script> <br /></p>
+
+<p>Consider a perturbated problem, we need to address the following problem:</p>
+
+<p><script type="math/tex">\begin{align*}
+		y + \Delta y = \underset{\text{truncation error}}{(A + \Delta A)^{-1}}(b + \Delta b)
+	\end{align*}</script> where <script type="math/tex">\Delta A \in R^{n \times n}</script>, <script type="math/tex">\Delta b \in R^n</script>, <script type="math/tex">\Delta b \in R^n</script>, <script type="math/tex">\Delta y \in R^n</script> <br /></p>
+
+<p><script type="math/tex">\begin{equation*}
+		\Delta y_i = \delta_i (x + \Delta x) - \delta_i(x)\\
+		\Delta y_i = \sum_{i = 1}^m \frac{\partial \delta_i(x)}{\delta x_i}\cdot \Delta x + O (|\Delta x|^2)
+	\end{equation*}</script><br /></p>
+
+<p><script type="math/tex">\begin{align*} 
+		\frac{\Delta y_i}{y_i} = \underset{\text{Condition Number}\kappa_{ij}(x)}{\sum_{i = 1}^m \frac{\partial \delta_i(x)}{\partial x_j} \cdot \frac{x_j}{\delta_i(x)} }\cdot \frac{\delta x_j}{x_j}\\
+	\end{align*}</script> <br /></p>
+
+<p>There exists a rule of thumb of conditionn number <script type="math/tex">\kappa_ij(x)</script> : If <script type="math/tex">\kappa_ij(x) = 10^k</script>, it indicates you may lose up to <script type="math/tex">k</script> digits of precision</p>
+
+<p>Here gives an simple example of Addition: <br /><br />
+<script type="math/tex">\begin{equation*}
+		y = \delta (x_1, x_2) = x_1 + x_2, x_1, x_2 \in R \setminus \lbrace 0 \rbrace\\
+		k_1 = \frac{\partial \delta}{\partial x_1}\cdot \frac{x_1}{\delta} = \frac{x_1}{x_1 + x_2} = \frac{1}{1 + \frac{x_2}{x_1}}\\
+		k_2 = \frac{1}{1+ \frac{x_1}{x_2}}
+	\end{equation*}</script></p>
+
+<p>In this example, we have high condition number if <script type="math/tex">\frac{x_1}{x_2} \sim 1</script>. In other words, the function is not stable when  <script type="math/tex">\frac{x_1}{x_2} \sim 1</script><br /></p>
+
+<p>Apart from that, the following examples also give high condition number:</p>
+
+<ul>
+  <li>Finite Difference: $$ \frac{f(x + h) - f(x)}{h}$$ </li>
+  <li>Exponential Expansion: $$ e^{-10} = 1 - 10 + \frac{100}{2} - \frac{1000}{6} \cdots $$</li>
+ </ul>
+<p>The function is ill-conditioned when <script type="math/tex">% <![CDATA[
+x < 0 %]]></script>. To avoid the instability, we can simply change our problem to <script type="math/tex">\frac{1}{e^x}</script> for <script type="math/tex">% <![CDATA[
+x < 1 %]]></script>. The follwing grpah gives a comparision to original problem and modified problem by calculating the relative error: <script type="math/tex">\sum_{i = 1}^{20} \frac{x^i}{i!}</script> <br />
+<img src="/images/Simulation/cn1.png" alt="cn1" /></p>
+
+<p>From the above example, we can know that stability is an character in evaluating uncertainty of a model since small perturbation may lead to exponential effect in ill-conditioned model. In the later session, we will learn how to <b> quanifying uncertainty </b> step-by-step.</p>
 
         
       </div><!-- /.entry-content -->
     </div><!-- /.entry-wrapper -->
     <nav class="pagination" role="navigation">
       
-        <a href="http://localhost:4000/simu/brownian_motion/" class="btn" title="Introduction to Brownian Motion">Previous</a>
       
+        <a href="http://localhost:4000/ml/classifier_lda/" class="btn" title="LDA Classifier">Next</a>
       
     </nav><!-- /.pagination -->
   </article>

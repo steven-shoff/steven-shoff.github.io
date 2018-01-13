@@ -4,7 +4,7 @@ title: "QDA Classifier"
 modified:
 categories: ml
 excerpt:
-tags: []
+tags: [Machine Learning, Classifier, QDA]
 images:
 date: 2017-12-02T15:39:55-04:00
 modified: 2017-12-03T14:19:19-04:00

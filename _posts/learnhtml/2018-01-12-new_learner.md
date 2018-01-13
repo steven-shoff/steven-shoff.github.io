@@ -4,7 +4,7 @@ title: "The starting guide of HTML5"
 modified:
 categories: learnhtml
 excerpt:
-tags: [Brownian Motion, Simulation]
+tags: [HTML5]
 images:
 date: 2018-01-12T15:39:55-04:00
 modified: 2018-01-12T18:19:19-04:00

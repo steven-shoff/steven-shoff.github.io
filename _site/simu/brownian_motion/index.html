@@ -9,7 +9,7 @@
 <meta name="description" content="Method: Brownain Motion
 
 ">
-<meta name="keywords" content="Brownian Motion, Simulation">
+<meta name="keywords" content="Brownian Motion, Numerical Analysis, Simulation">
 
 
 <!-- Twitter Cards -->
@@ -92,7 +92,7 @@
 		    <li><a href="http://localhost:4000/about/" >About</a></li>
 		  
 		    
-		    <li><a href="http://localhost:4000/simu/" >Simulation</a></li>
+		    <li><a href="http://localhost:4000/simu/" >Numerical Analysis</a></li>
 		  
 		    
 		    <li><a href="http://localhost:4000/ml/" >ML models</a></li>
@@ -128,7 +128,7 @@
     <div class="entry-wrapper">
       <header class="entry-header">
         <ul class="entry-tags">
-          <li><a href="http://localhost:4000/tags/#Brownian Motion" title="Pages tagged Brownian Motion">Brownian Motion</a></li><li><a href="http://localhost:4000/tags/#Simulation" title="Pages tagged Simulation">Simulation</a></li>
+          <li><a href="http://localhost:4000/tags/#Brownian Motion" title="Pages tagged Brownian Motion">Brownian Motion</a></li><li><a href="http://localhost:4000/tags/#Numerical Analysis" title="Pages tagged Numerical Analysis">Numerical Analysis</a></li><li><a href="http://localhost:4000/tags/#Simulation" title="Pages tagged Simulation">Simulation</a></li>
         </ul>
         
           <h1 class="entry-title">Introduction to Brownian Motion</h1>
@@ -161,6 +161,19 @@
 <p>Model: Simple Brownian Motion</p>
 
 <p>The code below shows how to stimulate the motion of a single particle in one-dimension. The motion is composed of a squence of normally distributed random displacement.</p>
+
+<p>Given a fixed time increment <script type="math/tex">\Delta t > 0</script>. We consider<br /></p>
+
+<script type="math/tex; mode=display">\begin{align*}
+        W(\Delta t) = W(t + \Delta t) - W(t) \sim N(0, \Delta t)\\
+    \end{align*}</script>
+
+<p>Hence, we divide the interval [0, T] into a grid such that <br /></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align*}
+        0 = t_1 < \dots < t_N = T \hspace{5pt}\text{   with    } t_{i+1} - t_i = \Delta t\\
+    \end{align*} %]]></script>
 
 <div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">BrownianMotion</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     

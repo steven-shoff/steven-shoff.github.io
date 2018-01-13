@@ -4,7 +4,7 @@ title: "Introduction to Brownian Motion"
 modified:
 categories: simu
 excerpt:
-tags: [Brownian Motion, Simulation]
+tags: [Brownian Motion, Numerical Analysis, Simulation]
 images:
 date: 2018-01-01T15:39:55-04:00
 modified: 2018-01-01T18:19:19-04:00
@@ -24,6 +24,22 @@ import numpy as np
 Model: Simple Brownian Motion
 
 The code below shows how to stimulate the motion of a single particle in one-dimension. The motion is composed of a squence of normally distributed random displacement.
+
+Given a fixed time increment $$\Delta t > 0$$. We consider<br />
+
+$$
+    \begin{align*}
+        W(\Delta t) = W(t + \Delta t) - W(t) \sim N(0, \Delta t)\\
+    \end{align*}
+$$
+
+Hence, we divide the interval [0, T] into a grid such that <br />
+
+$$
+    \begin{align*}
+        0 = t_1 < \dots < t_N = T \hspace{5pt}\text{   with    } t_{i+1} - t_i = \Delta t\\
+    \end{align*}
+$$
 
 ```python
 def BrownianMotion(N, T):

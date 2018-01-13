@@ -4,7 +4,7 @@ title: "LDA Classifier"
 modified:
 categories: ml
 excerpt:
-tags: []
+tags: [Machine Learning, Classifier, LDA]
 images:
 date: 2017-12-01T15:39:55-04:00
 modified: 2017-12-02T14:19:19-04:00
