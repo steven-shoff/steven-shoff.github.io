@@ -1,14 +1,13 @@
 ---
----
 layout: post
 title: "The starting guide of HTML5"
 modified:
-categories: learn_html
+categories: learnhtml
 excerpt:
 tags: [Brownian Motion, Simulation]
 images:
 date: 2018-01-12T15:39:55-04:00
-modified: 2018-01-13T18:19:19-04:00
+modified: 2018-01-12T18:19:19-04:00
 ---
 
 ## This post is specially designed for my sweetheart:)
@@ -22,16 +21,18 @@ modified: 2018-01-13T18:19:19-04:00
 
 ```html
 <!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
+<html>                                 <!-- For a basic html page, it contains a head and a body -->
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
+	<head>
+		<title>Page Title</title>      <!-- This is where you define the title and other features in the page -->
+	</head>
 
-</body>
+	<body>
+
+		<h1>This is a Heading</h1>     <!-- <h> is a command to define the header of a paragraph -->
+		<p>This is a paragraph.</p>    <!-- <p> is a command to define the content of a paragraph -->
+
+	</body>
 </html>
 ```
 
