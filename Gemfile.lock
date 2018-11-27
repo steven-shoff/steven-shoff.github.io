@@ -214,6 +214,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffi (= 1.9.18)
   github-pages
   jekyll-feed (~> 0.6)
   jekyll-gist

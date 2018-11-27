@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Numerical Analysis
+title: Numerical Mathematics and Stochastics
 excerpt: "An archive of articles sorted by date."
 search_omit: true
 ---

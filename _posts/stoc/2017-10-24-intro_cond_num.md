@@ -2,7 +2,7 @@
 layout: post
 title: "Condition Number"
 modified:
-categories: simu
+categories: stoc
 excerpt:
 tags: [Conditional Number, Numerical Analysis, Stability]
 images:

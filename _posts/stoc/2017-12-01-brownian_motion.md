@@ -2,7 +2,7 @@
 layout: post
 title: "Introduction to Brownian Motion"
 modified:
-categories: simu
+categories: stoc
 excerpt:
 tags: [Brownian Motion, Numerical Analysis, Simulation]
 images:
