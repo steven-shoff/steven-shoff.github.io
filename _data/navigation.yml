@@ -3,8 +3,8 @@
 - title: About
   url: /about/
 
-- title: Numerical Analysis
-  url: /simu/
+- title: Numerical Mathematics and Stochastics
+  url: /stoc/
 
 - title: ML models
   url: /ml/
